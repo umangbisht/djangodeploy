@@ -1,10 +1,15 @@
 FROM python:3.8.3
 
-WORKDIR /drf_project
+ENV PYTHONUNBUFFERED 1
 
-COPY requirements.txt .
+WORKDIR /app
+
+ADD . /app 
+
+COPY ./requirements.txt /app/requirements.txt
+
 RUN pip install -r requirements.txt
 
-COPY /drf_project .
+COPY . /app
 
 CMD ["python", "manage.py", "runserver"]
